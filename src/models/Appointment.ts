@@ -1,4 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+
+import Field from './Field';
+import User from './User';
 
 @Entity('appointments')
 class Appointment {
@@ -6,7 +9,18 @@ class Appointment {
     id: string;
 
     @Column()
-    field: string;
+    field_id: string;
+
+    @OneToOne(() => Field)
+    @JoinColumn({ name: 'field_id' })
+    field: Field;
+
+    @Column()
+    client_id: string;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'client_id' })
+    client: User;
 
     @Column('timestamp with time zone')
     date: Date;

@@ -1,22 +1,26 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class CreateAppointments1630288005191 implements MigrationInterface {
 
-    public async up(queryRunner: QueryRunner): Promise<void> { 
+    public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
                 name: 'appointments',
                 columns: [
                     {
                         name: 'id',
-                        type: 'varchar',
+                        type: 'uuid',
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()',
                     },
                     {
-                        name: 'field',
-                        type: 'varchar',
+                        name: 'field_id',
+                        type: 'uuid',
+                    },
+                    {
+                        name: 'client_id',
+                        type: 'uuid',
                     },
                     {
                         name: 'date',
