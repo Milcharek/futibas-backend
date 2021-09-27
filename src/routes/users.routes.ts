@@ -16,7 +16,12 @@ usersRouter.post('/', async (request, response) => {
             password
         });
         
-        return response.json(user);
+        const userToReturn = { 
+            name: user.name, 
+            email: user.email 
+        }
+        
+        return response.json(userToReturn);
     }
     catch (err: any) {
         return response.status(400).json({ error: err.message });
