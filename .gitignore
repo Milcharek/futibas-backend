@@ -1,2 +1,4 @@
 node_modules/
 translate.md
+tmp/*
+!tmp/.gitkeep
