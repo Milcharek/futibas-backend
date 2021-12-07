@@ -1,4 +1,4 @@
-import { ErrorCode } from "../config/constants";
+import { ErrorCode } from "../../config/constants";
 
 class Error {
     public readonly message: string;

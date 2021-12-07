@@ -2,12 +2,12 @@ import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken'
 
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
 
-import authConfig from '../config/auth';
-import User from '../models/User';
+import authConfig from '@config/auth';
+import User from '../infra/typeorm/entities/User';
 
-import { ErrorCode } from '../config/constants';
+import { ErrorCode } from '@config/constants';
 
 interface IRequest {
     email: string,
@@ -23,7 +23,7 @@ class AuthenticateUserService {
     public async execute({ email, password }: IRequest): Promise<IResponse> {
         const usersRepository = getRepository(User);
 
-        const user = await usersRepository.findOne({ where : { email } });
+        const user = await usersRepository.findOne({ where: { email } });
 
         if (!user) {
             throw new AppError('Incorrect email/password combination.', ErrorCode.Unauthorized);

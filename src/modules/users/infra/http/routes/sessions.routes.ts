@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import AuthenticateUserService from '../services/AuthenticateUserService';
+import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
 const sessionsRouter = Router();
 
@@ -19,7 +19,7 @@ sessionsRouter.post('/', async (request, response) => {
         email: user.email,
         created_at: user.created_at,
         updated_at: user.updated_at,
-        };
+    };
 
     return response.json({ userWithoutPassword, token });
 })

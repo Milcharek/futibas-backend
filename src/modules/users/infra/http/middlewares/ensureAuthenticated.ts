@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
-import AppError from '../errors/AppError';
-import { ErrorCode } from '../config/constants';
+import AppError from '@shared/errors/AppError';
+import { ErrorCode } from '@config/constants';
 
-import authConfig from '../config/auth';
+import authConfig from '@config/auth';
 
 interface ITokenPayload {
     iat: number;
@@ -20,7 +20,7 @@ export default function ensureAuthenticated(request: Request, response: Response
     }
 
     const [, token] = authHeader.split(' ');
-    
+
     try {
         const decoded = verify(token, authConfig.jwt.secret);
 
